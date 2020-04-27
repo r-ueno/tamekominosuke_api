@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>入力フォーム</title>
+</head>
+<body>
+<h1>入力フォーム</h1>
+<form action="/v1/tamekomi/create" method="POST">
+    ユーザ名： user <input type="text" name="user" required><br>
+    登録日： entry_date <input type="date" name="entry_date" required><br>
+    出勤時刻： on_date_time <input type="time" name="on_date_time" step="2" value="09:00:00"><br>
+    退勤時刻： off_date_time <input type="time" name="off_date_time" step="2" value="17:30:00"><br>
+    内容： detail <input type="text" name="detail"><br>
+    <button type="submit">送信</button>
+</form>
+</body>
+</html>
