@@ -12,6 +12,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+// CORSを許可する処理を追加
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next()
+  })
+
 const con = mysql.createConnection({
   host: 'localhost',
   user: '',
@@ -60,7 +67,7 @@ app.get('/v1/tamekomi/select', (req, res) => {
             return res.send(false)
         }
         
-        const sql = "select * from attendance where user = ? and entry_date = ?"
+        const sql = "select * from attendance where user = ? and entry_date = ? order by entry_date"
         con.query(sql, [selectUser,entryDate], function (err, result, fields) {  
             if (err) {
                 console.log(err)
@@ -70,7 +77,7 @@ app.get('/v1/tamekomi/select', (req, res) => {
             res.send(result)
             });
     } else {
-        const sql = "select * from attendance where user = ? "
+        const sql = "select * from attendance where user = ? order by entry_date"
         con.query(sql, selectUser, function (err, result, fields) {  
             if (err) {
                 console.log(err)
